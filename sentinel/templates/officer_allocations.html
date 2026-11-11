@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Allocations</h2>
+<form method="post" action="/officer/allocations/run" class="row g-3 mb-4">
+  <input type="hidden" name="csrf_token" value="{{ request.session['csrf_token'] }}" />
+  <div class="col-md-4">
+    <label class="form-label">Resource</label>
+    <select class="form-select" name="resource">
+      {% for item in resources %}
+      <option value="{{ item }}" {% if resource and item == resource %}selected{% endif %}>{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Supplies available vs. needed</label>
+    <input class="form-control" type="number" step="1" name="supply_pct" value="{{ supply_pct or 40 }}" min="1" max="100" />
+  </div>
+  <div class="col-md-4 d-flex align-items-end">
+    <button class="btn btn-primary" type="submit">Run allocation</button>
+  </div>
+</form>
+{% if results %}
+<table class="table table-striped">
+  <thead><tr><th>Camp</th><th>Priority</th><th>Demand</th><th>Recommended</th><th>Baseline</th><th>Coverage</th><th>Rank</th><th>Reason</th></tr></thead>
+  <tbody>
+    {% for row in results %}
+    <tr>
+      <td>{{ row.camp_id }}</td>
+      <td>{{ '%.3f'|format(row.priority_score) }}</td>
+      <td>{{ '%.2f'|format(row.demand) }}</td>
+      <td>{{ '%.2f'|format(row.recommended_qty) }}</td>
+      <td>{{ '%.2f'|format(row.baseline_qty) }}</td>
+      <td>{{ '%.2f'|format(row.coverage) }}</td>
+      <td>{{ row.rank }}</td>
+      <td>{{ row.reason }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

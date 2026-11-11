@@ -1,0 +1,7 @@
+existing_records,mode,inserts_timed,median_ms,p95_ms,platform,processor
+1000,incremental_on_insert,100,0.05810000584460795,0.08574001112719998,Windows-11-10.0.26300-SP0,"AMD64 Family 23 Model 160 Stepping 0, AuthenticAMD"
+1000,full_rescan,5,386.24170000548474,414.5352799911052,Windows-11-10.0.26300-SP0,"AMD64 Family 23 Model 160 Stepping 0, AuthenticAMD"
+5000,incremental_on_insert,100,0.06350001785904169,0.09021998848766088,Windows-11-10.0.26300-SP0,"AMD64 Family 23 Model 160 Stepping 0, AuthenticAMD"
+5000,full_rescan,5,1784.6510999952443,1930.666580016259,Windows-11-10.0.26300-SP0,"AMD64 Family 23 Model 160 Stepping 0, AuthenticAMD"
+20000,incremental_on_insert,100,0.05185000190977007,0.19571000302676086,Windows-11-10.0.26300-SP0,"AMD64 Family 23 Model 160 Stepping 0, AuthenticAMD"
+20000,full_rescan,5,7391.966900002444,7689.798379997956,Windows-11-10.0.26300-SP0,"AMD64 Family 23 Model 160 Stepping 0, AuthenticAMD"

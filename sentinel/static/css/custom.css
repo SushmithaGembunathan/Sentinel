@@ -1,0 +1,15 @@
+body {
+  background: #f7f9fc;
+}
+.card {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.navbar {
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.table th {
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

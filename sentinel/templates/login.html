@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title mb-3">Sentinel</h2>
+        <p class="text-muted">Relief camp coordination and integrity checks</p>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="post" action="/login">
+          <input type="hidden" name="csrf_token" value="{{ request.session['csrf_token'] }}" />
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input class="form-control" name="username" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input class="form-control" type="password" name="password" required />
+          </div>
+          <button class="btn btn-primary w-100" type="submit">Sign in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

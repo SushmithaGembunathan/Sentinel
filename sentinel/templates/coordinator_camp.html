@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Camp details</h2>
+<div class="card mb-4">
+  <div class="card-body">
+    <h5>{{ camp.name }} ({{ camp.camp_id }})</h5>
+    <p class="mb-0">District: {{ camp.district }} | Location: {{ camp.location }}</p>
+    <p>Last updated by {{ camp.updated_by or 'system' }} at {{ camp.updated_at }}</p>
+    <form method="post" action="/coordinator/camp/update">
+      <input type="hidden" name="csrf_token" value="{{ request.session['csrf_token'] }}" />
+      <input type="hidden" name="camp_id" value="{{ camp.camp_id }}" />
+      <div class="row g-3">
+        <div class="col-md-2"><label class="form-label">Headcount</label><input class="form-control" type="number" name="headcount" value="{{ camp.headcount }}" required /></div>
+        <div class="col-md-2"><label class="form-label">Elderly</label><input class="form-control" type="number" name="elderly" value="{{ camp.elderly }}" required /></div>
+        <div class="col-md-2"><label class="form-label">Disabled</label><input class="form-control" type="number" name="disabled" value="{{ camp.disabled }}" required /></div>
+        <div class="col-md-2"><label class="form-label">Maternal</label><input class="form-control" type="number" name="maternal" value="{{ camp.maternal }}" required /></div>
+        <div class="col-md-2"><label class="form-label">Infant</label><input class="form-control" type="number" name="infant" value="{{ camp.infant }}" required /></div>
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-md-3"><label class="form-label">Food stock</label><input class="form-control" type="number" step="0.01" name="stock_food" value="{{ camp.stock_food }}" /></div>
+        <div class="col-md-3"><label class="form-label">Water stock</label><input class="form-control" type="number" step="0.01" name="stock_water" value="{{ camp.stock_water }}" /></div>
+        <div class="col-md-3"><label class="form-label">Medical stock</label><input class="form-control" type="number" step="0.01" name="stock_medical" value="{{ camp.stock_medical }}" /></div>
+        <div class="col-md-3"><label class="form-label">Infant stock</label><input class="form-control" type="number" step="0.01" name="stock_infant_supplies" value="{{ camp.stock_infant_supplies }}" /></div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Save updates</button>
+    </form>
+  </div>
+</div>
+<h4>History</h4>
+<table class="table table-striped">
+  <thead><tr><th>Updated by</th><th>Updated at</th><th>Old values</th><th>New values</th></tr></thead>
+  <tbody>
+    {% for item in history %}
+    <tr><td>{{ item.updated_by }}</td><td>{{ item.updated_at }}</td><td>{{ item.old_values }}</td><td>{{ item.new_values }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

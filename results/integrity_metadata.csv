@@ -1,0 +1,13 @@
+parameter,value
+seed_count,30
+clean_records_per_seed,1000
+duplicate_injection_rate,0.05
+missing_assessment_injection_rate,0.05
+inflated_amount_injection_rate,0.05
+inflation_multiplier,2.5
+inflation_multiplier_min,2.5
+inflation_multiplier_max,2.5
+anomaly_rules,duplicate|missing_assessment|inflated_amount
+batch_zscore_threshold,3.0
+modified_zscore_threshold,3.5
+duplicate_window_days,7

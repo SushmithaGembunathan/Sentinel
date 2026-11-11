@@ -1,0 +1,5 @@
+rule,injected,tp,fp,fn,precision,recall,pair_injected,pair_tp,pair_fp,pair_fn,pair_precision,pair_recall,clean_record_false_positive_rate,multi_label_records,overlap_excess_labels
+duplicate,1500,1363,1363,137,0.5,0.9086666666666666,1500.0,1363.0,0.0,137.0,1.0,0.9086666666666666,,,
+missing_assessment,1560,1560,0,0,1.0,1.0,,,,,,,,,
+inflated_amount,1560,268,357,1292,0.4288,0.1717948717948718,,,,,,,,,
+overall_unique_records,4410,3114,1583,1296,0.6629763678944007,0.7061224489795919,,,,,,,0.011501845735379834,208.0,210.0

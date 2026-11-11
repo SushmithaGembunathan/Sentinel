@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Fraud flags</h2>
+{% if flags %}
+<table class="table table-striped">
+  <thead><tr><th>Payment</th><th>Reason</th><th>Severity</th><th>Status</th><th>Review</th></tr></thead>
+  <tbody>
+    {% for flag in flags %}
+    <tr>
+      <td>{{ flag.payment_id }}</td>
+      <td>{{ flag.reason }}</td>
+      <td>{{ flag.severity }}</td>
+      <td>{{ flag.status }}</td>
+      <td>
+        <form method="post" action="/auditor/flags/review">
+          <input type="hidden" name="csrf_token" value="{{ request.session['csrf_token'] }}" />
+          <input type="hidden" name="flag_id" value="{{ flag.id }}" />
+          <div class="input-group input-group-sm">
+            <select class="form-select" name="status">
+              <option value="confirmed">confirmed</option>
+              <option value="false alarm">false alarm</option>
+            </select>
+            <input class="form-control" type="text" name="note" placeholder="Required note" required />
+            <button class="btn btn-primary" type="submit">Save</button>
+          </div>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No fraud flags.</p>
+{% endif %}
+{% endblock %}

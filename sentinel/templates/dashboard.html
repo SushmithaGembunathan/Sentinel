@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<div class="row g-3 mt-2">
+  {% if user.role == 'admin' %}
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Users</h5><p>Manage admin, officer, coordinator, and auditor accounts.</p><a href="/admin/users" class="btn btn-outline-primary">Open</a></div></div></div>
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Camps</h5><p>Register camps and assign coordinators.</p><a href="/admin/camps" class="btn btn-outline-primary">Open</a></div></div></div>
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Scoring</h5><p>Manage weighting and allocation settings.</p><a href="/admin/scoring" class="btn btn-outline-primary">Open</a></div></div></div>
+  {% elif user.role == 'coordinator' %}
+  <div class="col-md-6"><div class="card h-100"><div class="card-body"><h5>Camp data</h5><p>Update headcount, vulnerable-group counts and stock.</p><a href="/coordinator/camp" class="btn btn-outline-primary">Open</a></div></div></div>
+  {% elif user.role == 'officer' %}
+  <div class="col-md-6"><div class="card h-100"><div class="card-body"><h5>Allocation</h5><p>Run the equitable resource allocation and dispatch recommendations.</p><a href="/officer/allocations" class="btn btn-outline-primary">Open</a></div></div></div>
+  <div class="col-md-6"><div class="card h-100"><div class="card-body"><h5>Dispatches</h5><p>Approve or reject recommendations.</p><a href="/officer/dispatches" class="btn btn-outline-primary">Open</a></div></div></div>
+  {% elif user.role == 'auditor' %}
+  <div class="col-md-6"><div class="card h-100"><div class="card-body"><h5>Fraud flags</h5><p>Review payment anomalies and classify them.</p><a href="/auditor/flags" class="btn btn-outline-primary">Open</a></div></div></div>
+  <div class="col-md-6"><div class="card h-100"><div class="card-body"><h5>Audit log</h5><p>Inspect the action trail across the system.</p><a href="/auditor/audit-log" class="btn btn-outline-primary">Open</a></div></div></div>
+  {% endif %}
+</div>
+{% endblock %}

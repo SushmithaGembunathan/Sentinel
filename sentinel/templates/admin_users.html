@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Users</h2>
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Create user</h5>
+    <form method="post" action="/admin/users">
+      <input type="hidden" name="csrf_token" value="{{ request.session['csrf_token'] }}" />
+      <div class="row g-3">
+        <div class="col-md-3"><input class="form-control" type="text" name="username" placeholder="Username" required /></div>
+        <div class="col-md-3"><input class="form-control" type="password" name="password" placeholder="Password" required /></div>
+        <div class="col-md-3"><select class="form-select" name="role"><option value="admin">admin</option><option value="officer">officer</option><option value="coordinator">coordinator</option><option value="auditor">auditor</option></select></div>
+        <div class="col-md-3"><input class="form-control" type="text" name="camp_id" placeholder="Camp ID (optional)" /></div>
+      </div>
+      <button class="btn btn-primary mt-3" type="submit">Create user</button>
+    </form>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead><tr><th>Username</th><th>Role</th><th>Camp</th></tr></thead>
+  <tbody>
+    {% for row in users %}
+    <tr><td>{{ row.username }}</td><td>{{ row.role }}</td><td>{{ row.camp_id or '—' }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

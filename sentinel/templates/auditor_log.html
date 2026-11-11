@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Audit log</h2>
+<table class="table table-striped table-sm">
+  <thead><tr><th>Timestamp</th><th>User</th><th>Role</th><th>Action</th><th>Entity</th><th>ID</th></tr></thead>
+  <tbody>
+    {% for log in logs %}
+    <tr><td>{{ log.timestamp }}</td><td>{{ log.username }}</td><td>{{ log.role }}</td><td>{{ log.action }}</td><td>{{ log.entity }}</td><td>{{ log.entity_id or '—' }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

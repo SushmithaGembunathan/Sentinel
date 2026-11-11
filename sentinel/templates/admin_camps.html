@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Camps</h2>
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Create camp</h5>
+    <form method="post" action="/admin/camps">
+      <input type="hidden" name="csrf_token" value="{{ request.session['csrf_token'] }}" />
+      <div class="row g-3">
+        <div class="col-md-2"><input class="form-control" name="camp_id" placeholder="Camp ID" required /></div>
+        <div class="col-md-3"><input class="form-control" name="name" placeholder="Name" required /></div>
+        <div class="col-md-2"><input class="form-control" name="district" placeholder="District" required /></div>
+        <div class="col-md-2"><input class="form-control" name="location" placeholder="Location" required /></div>
+        <div class="col-md-1"><input class="form-control" name="headcount" type="number" value="0" required /></div>
+        <div class="col-md-1"><input class="form-control" name="elderly" type="number" value="0" required /></div>
+        <div class="col-md-1"><input class="form-control" name="disabled" type="number" value="0" required /></div>
+        <div class="col-md-1"><input class="form-control" name="maternal" type="number" value="0" required /></div>
+        <div class="col-md-1"><input class="form-control" name="infant" type="number" value="0" required /></div>
+        <div class="col-md-2">
+          <select class="form-select" name="assigned_coordinator_id">
+            <option value="">Unassigned</option>
+            {% for coordinator in coordinators %}
+            <option value="{{ coordinator.id }}">{{ coordinator.username }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary mt-3" type="submit">Create camp</button>
+    </form>
+  </div>
+</div>
+<div class="card mb-4">
+  <div class="card-body">
+    <h5>Bulk camp upload</h5>
+    <form method="post" action="/admin/camps/import" enctype="multipart/form-data">
+      <input type="hidden" name="csrf_token" value="{{ request.session['csrf_token'] }}" />
+      <input class="form-control" type="file" name="file" accept=".csv" required />
+      <button class="btn btn-secondary mt-2" type="submit">Import CSV</button>
+    </form>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead><tr><th>Camp ID</th><th>Name</th><th>District</th><th>Location</th><th>Assigned</th><th>Headcount</th></tr></thead>
+  <tbody>
+    {% for camp in camps %}
+    <tr><td>{{ camp.camp_id }}</td><td>{{ camp.name }}</td><td>{{ camp.district }}</td><td>{{ camp.location }}</td><td>{{ camp.assigned_coordinator_id or '—' }}</td><td>{{ camp.headcount }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
